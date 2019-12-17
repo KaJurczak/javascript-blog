@@ -90,6 +90,7 @@ function generateTitleLinks(){
     console.log(linkHTML);
 
     /* insert link into titleList */
+    titleList.insertAdjacentHTML('beforeend', linkHTML);
 
   }
 }
