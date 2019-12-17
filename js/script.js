@@ -69,6 +69,8 @@ function generateTitleLinks(){
   clearMessages();
 
   /* for each article */
+  let html = '';
+
   const articles = document.querySelectorAll(optArticleSelector);
 
   for(let article of articles){
@@ -90,9 +92,14 @@ function generateTitleLinks(){
     console.log(linkHTML);
 
     /* insert link into titleList */
-    titleList.insertAdjacentHTML('beforeend', linkHTML);
+    html = html + linkHTML
+
+    console.log(html);
 
   }
+
+  titleList.innerHTML = html;
+
 }
 
 generateTitleLinks();
