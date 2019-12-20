@@ -117,7 +117,7 @@ function generateTags(){
   for(let article of articles) {
 
     /* find tags wrapper */
-    const articleTag = article.querySelector(optArticleTagsSelector).innerHTML;
+    const articleTag = article.querySelector(optArticleTagsSelector);
 
     console.log(articleTag);
 
@@ -143,11 +143,17 @@ function generateTags(){
         console.log(linkHTML);
 
       /* add generated code to html variable */
+        html = html + ' ' + linkHTML;
+
+        console.log(linkHTML);
 
     /* END LOOP: for each tag */
       }
 
     /* insert HTML of all the links into the tags wrapper */
+    articleTag.innerHTML = html;
+
+    console.log('articleTag to:', articleTag);
 
   /* END LOOP: for every article: */
   }
