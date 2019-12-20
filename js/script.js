@@ -9,13 +9,13 @@ const titleClickHandler = function(event){
   event.preventDefault(); //nie zmienia adresu strony przy klikaniu w linki
   const clickedElement = this; //NIE ROZUMIEM CO TO??!!
   console.log('Link was clicked!');
-   //console.log(event);
+  //console.log(event);
 
   /* remove class 'active' from all article links  */
   const activeLinks = document.querySelectorAll('.titles a.active');
 
   for(let activeLink of activeLinks){
-  activeLink.classList.remove('active');
+    activeLink.classList.remove('active');
   }
 
   /* add class 'active' to the clicked link */
@@ -27,24 +27,24 @@ const titleClickHandler = function(event){
   const activeArticles = document.querySelectorAll('.post.active');
 
   for(let activeArticle of activeArticles){
-     activeArticle.classList.remove('active');
+    activeArticle.classList.remove('active');
   }
 
-   /* get 'href' attribute from the clicked link */
-  const articleSelector = clickedElement.getAttribute('href')
+  /* get 'href' attribute from the clicked link */
+  const articleSelector = clickedElement.getAttribute('href');
 
 
   console.log(articleSelector);
 
   /* find the correct article using the selector (value of 'href' attribute) */
-  const targetArticle = document.querySelector(articleSelector)
+  const targetArticle = document.querySelector(articleSelector);
 
   console.log(targetArticle);
 
   /* add class 'active' to the correct article */
   targetArticle.classList.add('active');
 
-}
+};
 
 
 
@@ -58,8 +58,8 @@ function generateTitleLinks(){
   const titleList = document.querySelector(optTitleListSelector);
 
   function clearMessages(){
-	titleList.innerHTML = '';
-}
+    titleList.innerHTML = '';
+  }
   clearMessages();
 
   /* for each article */
@@ -86,7 +86,7 @@ function generateTitleLinks(){
     console.log(linkHTML);
 
     /* insert link into titleList */
-    html = html + linkHTML
+    html = html + linkHTML;
 
     console.log(html);
 
