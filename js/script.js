@@ -135,20 +135,20 @@ function generateTags(){
     console.log('tagsArray is:', tagsArray);
 
     /* START LOOP: for each tag */
-      for(let tagArray of tagsArray){
+    for(let tagArray of tagsArray){
 
       /* generate HTML of the link */
-        const linkHTML = '<li><a href="#' + tagArray + '">' + tagArray + '</a></li>';
+      const linkHTML = '<li><a href="#' + tagArray + '">' + tagArray + '</a></li>';
 
-        console.log(linkHTML);
+      console.log(linkHTML);
 
       /* add generated code to html variable */
-        html = html + ' ' + linkHTML;
+      html = html + ' ' + linkHTML;
 
-        console.log(linkHTML);
+      console.log(linkHTML);
 
     /* END LOOP: for each tag */
-      }
+    }
 
     /* insert HTML of all the links into the tags wrapper */
     articleTag.innerHTML = html;
