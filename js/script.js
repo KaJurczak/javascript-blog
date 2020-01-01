@@ -52,6 +52,7 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list';
+  //optArticleAuthorSelector = '.post-author';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -232,3 +233,40 @@ function addClickListenersToTags(){
 }
 
 addClickListenersToTags();
+
+
+function generateAuthors(){
+  /* find all articles */
+  const articles = document.querySelectorAll(optArticleSelector);
+
+  /* START LOOP: for every article: */
+  for(let article of articles) {
+
+    /* find authors wrapper */
+    const articleAuthor = article.querySelector('.post-author');
+
+    console.log('stała articleAuthor to: ', articleAuthor);
+
+    /* make html variable with empty string */
+    //let html = '';
+
+    /* get author from data-author attribute */
+    const articleNewAuthor = article.getAttribute('data-author');
+
+    console.log('stała articleNewAuthor to:', articleNewAuthor);
+
+    /* generate HTML of the link */
+    const linkHTML = '<a href="#' + articleNewAuthor + '">' + 'by ' + articleNewAuthor + '</a>';
+
+    console.log('stała linkHTML to: ', linkHTML);
+
+    /* insert HTML of the link into the author wrapper */
+    articleAuthor.innerHTML = linkHTML;
+
+    console.log('articleAuthor to:', articleAuthor);
+
+  /* END LOOP: for every article: */
+  }
+}
+
+generateAuthors();
