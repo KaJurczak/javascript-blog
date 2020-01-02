@@ -164,6 +164,7 @@ function generateTags(){
       else {
         allTags[tagArray]++;
       }
+      console.log('let allTags is: ', allTags);
 
     /* END LOOP: for each tag */
     }
@@ -188,7 +189,7 @@ function generateTags(){
   for (let tagArray in allTags) {
 
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    allTagsHTML += tagArray + ' (' + allTags[tagArray] + ')';
+    allTagsHTML += '<a href="#tag-' + tagArray + '">' + tagArray + '</a>' + ' (' + allTags[tagArray] + ')' + ' ';
 
     console.log('allTagsHTML to: ', allTagsHTML);
 
