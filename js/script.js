@@ -51,8 +51,9 @@ const titleClickHandler = function(event){
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
-  //optArticleAuthorSelector = '.post-author';
+  optArticleTagsSelector = '.post-tags .list',
+  optArticleAuthorSelector = '.post-author';
+  //optTagsListSelector = '.tags.list';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -112,6 +113,9 @@ generateTitleLinks();
 
 
 function generateTags(){
+  /* [NEW] create a new variable allTags with an empty object */
+  let allTags = {};
+
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
 
@@ -139,15 +143,27 @@ function generateTags(){
     /* START LOOP: for each tag */
     for(let tagArray of tagsArray){
 
+      console.log('tagArray to: ', tagArray);
+
       /* generate HTML of the link */
       const linkHTML = '<li><a href="#tag-' + tagArray + '">' + tagArray + '</a></li>'; //2020.01.01 dodane tag-
 
-      console.log(linkHTML);
+      console.log('linkHTML to: ', linkHTML);
 
       /* add generated code to html variable */
       html = html + ' ' + linkHTML;
 
-      console.log(linkHTML);
+      console.log('html to: ', html);
+
+      /* [NEW] check if this link is NOT already in allTags */
+      if(!allTags.hasOwnProperty(tagArray)){
+
+        /* [NEW] add tag to allTags object */
+        allTags[tagArray] = 1;
+      }
+      else {
+        allTags[tagArray]++;
+      }
 
     /* END LOOP: for each tag */
     }
@@ -159,6 +175,28 @@ function generateTags(){
 
   /* END LOOP: for every article: */
   }
+
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector('.tags');
+
+  console.log('tagList to: ', tagList);
+
+  /* [NEW] create variable for all links HTML code */
+  let allTagsHTML = '';
+
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for (let tagArray in allTags) {
+
+    /* [NEW] generate code of a link and add it to allTagsHTML */
+    allTagsHTML += tagArray + ' (' + allTags[tagArray] + ')';
+
+    console.log('allTagsHTML to: ', allTagsHTML);
+
+  /* [NEW] END LOOP: for each tag in allTags: */
+  }
+
+  /* [NEW] add html from allTagsHTML to tagList */
+  tagList.innerHTML = allTagsHTML;
 }
 
 generateTags();
@@ -243,7 +281,7 @@ function generateAuthors(){
   for(let article of articles) {
 
     /* find authors wrapper */
-    const articleAuthor = article.querySelector('.post-author');
+    const articleAuthor = article.querySelector(optArticleAuthorSelector);
 
     console.log('stała articleAuthor to: ', articleAuthor);
 
