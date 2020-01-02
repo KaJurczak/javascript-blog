@@ -247,7 +247,7 @@ function generateAuthors(){
 
     console.log('stała articleAuthor to: ', articleAuthor);
 
-      /* get author from data-author attribute */
+    /* get author from data-author attribute */
     const articleNewAuthor = article.getAttribute('data-author');
 
     console.log('stała articleNewAuthor to:', articleNewAuthor);
