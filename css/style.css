@@ -114,4 +114,29 @@ body {
 .post-tags p {
   margin: 0 10px 0 0;
 }
+
+.tag-size-1 {
+  font-size: 16px;
+  color: #535c68;
+}
+
+.tag-size-2 {
+  font-size: 24px;
+  color: #686de0;
+}
+
+.tag-size-3 {
+  font-size: 32px;
+  color: #4834d4;
+}
+
+.tag-size-4 {
+  font-size: 40px;
+  color: #30336b;
+}
+
+.tag-size-5 {
+  font-size: 48px;
+  color: #130f40;
+}
 /*# sourceMappingURL=style.css.map */

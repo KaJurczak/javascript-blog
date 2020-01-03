@@ -56,6 +56,7 @@ const optArticleSelector = '.post',
   //optTagsListSelector = '.tags.list',
   optCloudClassCount = 5,
   optCloudClassPrefix = 'tag-size-';
+  //optAuthorListSelector = '.list .authors';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -131,16 +132,10 @@ function CalculateTagsParams(allTags){
 
     console.log('params.max is:', params.max);
 
-    //const maxTag = Math.max(allTags[tag]);
-    //console.log('const maxTag is:', maxTag);
-
     /*find the rarest tags*/
     params.min = Math.min(allTags[tag], params.min);
 
     console.log('params.min is:', params.min);
-
-    //const minTag = Math.min(allTags[tag]);
-    //console.log('const minTag is:', minTag);
 
     /*CLOSE LOOP: for each tags */
   }
@@ -214,7 +209,7 @@ function generateTags(){
       console.log('html to: ', html);
 
       /* [NEW] check if this link is NOT already in allTags */
-      if(!Object.prototype.hasOwnProperty.call(allTags, tagArray)){  //??????? old version: if(!allTags.hasOwnProperty(tagArray)){ 
+      if(!Object.prototype.hasOwnProperty.call(allTags, tagArray)){  //??????? old version: if(!allTags.hasOwnProperty(tagArray)){
 
         /* [NEW] add tag to allTags object */
         allTags[tagArray] = 1;
@@ -252,7 +247,7 @@ function generateTags(){
   for (let tagArray in allTags) {
 
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    allTagsHTML += '<li>' + '<a class="' + optCloudClassPrefix + calculateTagClass(allTags[tagArray], tagsParams) + '" href="#tag-' + tagArray + '">' + tagArray + '</a>' + ' (' + allTags[tagArray] + ')' + '</li>';
+    allTagsHTML += '  ' + '<a class="' + optCloudClassPrefix + calculateTagClass(allTags[tagArray], tagsParams) + '" href="#tag-' + tagArray + '">' + tagArray + '</a>' + '  ';
 
     console.log('allTagsHTML to: ', allTagsHTML);
 
@@ -337,7 +332,44 @@ function addClickListenersToTags(){
 addClickListenersToTags();
 
 
+function CalculateAuthorsParams(allAuthors){
+
+  console.log('function CalculateAuthorsParams run');
+
+  /* Create object with two keys - max and min value*/
+  const params = {max: 0, min: 999999};
+
+  /*START LOOP: for each authors */
+  for (let author in allAuthors){
+
+    console.log('Value of authors ' + author + ' in allAuthors is:' + allAuthors[author]);
+
+    /*find the most common authors*/
+    params.max = Math.max(allAuthors[author], params.max);
+
+    console.log('params.max is:', params.max);
+
+    /*find the rarest authors*/
+    params.min = Math.min(allAuthors[author], params.min);
+
+    console.log('params.min is:', params.min);
+
+    /*CLOSE LOOP: for each authors */
+  }
+
+  /*return value of params */
+  console.log('params is:', params);
+
+  return params;
+
+}
+
+
 function generateAuthors(){
+
+  /* [NEW] create a new variable allAuthors with an empty array */
+  let allAuthors = {};
+
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
 
@@ -359,6 +391,17 @@ function generateAuthors(){
 
     console.log('stała linkHTML to: ', linkHTML);
 
+    /* [NEW] check if this link is NOT already in allAuthors */
+    if(!Object.prototype.hasOwnProperty.call(allAuthors, articleNewAuthor)){  //??????? old version: if(!allTags.hasOwnProperty(tagArray)){
+
+      /* [NEW] add author to allAuthors object */
+      allAuthors[articleNewAuthor] = 1;
+    }
+    else {
+      allAuthors[articleNewAuthor]++;
+    }
+    console.log('let allAuthors is: ', allAuthors);
+
     /* insert HTML of the link into the author wrapper */
     articleAuthor.innerHTML = linkHTML;
 
@@ -366,6 +409,38 @@ function generateAuthors(){
 
   /* END LOOP: for every article: */
   }
+
+  /* [NEW] find list of authors in right column */
+  const authorList = document.querySelector('.list.authors');
+
+  console.log('authorList to: ', authorList);
+
+  /* [NEW] Calculeate number of authors*/
+  const authorsParams = CalculateAuthorsParams(allAuthors);
+
+  console.log('const authorsParams is: ', authorsParams);
+
+  /* [NEW] create variable for all links HTML code */
+  let allAuthorsHTML = '';
+
+  /* [NEW] START LOOP: for each author in allAuthors: */
+  for (let allAuthor in allAuthors) {
+
+    /* [NEW] generate code of a link and add it to allAuthorsHTML */
+    allAuthorsHTML += '<li>' + '<a href="#author-' + allAuthor + '">' + allAuthor + '</a>'  + ' ( ' + allAuthors[allAuthor] + ' ) ' + '</li>';
+
+    console.log('allAuthorsHTML to: ', allAuthorsHTML);
+
+  /* [NEW] END LOOP: for each author in allAuthors: */
+  }
+
+  /* [NEW] add html from allAuthorsHTML to authorList */
+  console.log('poza pętlą allAuthorsHTML:', allAuthorsHTML);
+
+  authorList.innerHTML = allAuthorsHTML;
+
+  console.log('authorList:', authorList);
+
 }
 
 generateAuthors();
