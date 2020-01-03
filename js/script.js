@@ -52,8 +52,10 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
-  optArticleAuthorSelector = '.post-author';
-  //optTagsListSelector = '.tags.list';
+  optArticleAuthorSelector = '.post-author',
+  //optTagsListSelector = '.tags.list',
+  optCloudClassCount = 5,
+  optCloudClassPrefix = 'tag-size-';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -112,6 +114,62 @@ function generateTitleLinks(customSelector = ''){
 generateTitleLinks();
 
 
+function CalculateTagsParams(allTags){
+
+  console.log('function CalculateTagsParams run');
+
+  /* Create object with two keys - max and min value*/
+  const params = {max: 0, min: 999999};
+
+  /*START LOOP: for each tags */
+  for (let tag in allTags){
+
+    console.log('Value of tags ' + tag + ' in allTags is:' + allTags[tag]);
+
+    /*find the most common tags*/
+    params.max = Math.max(allTags[tag], params.max);
+
+    console.log('params.max is:', params.max);
+
+    //const maxTag = Math.max(allTags[tag]);
+    //console.log('const maxTag is:', maxTag);
+
+    /*find the rarest tags*/
+    params.min = Math.min(allTags[tag], params.min);
+
+    console.log('params.min is:', params.min);
+
+    //const minTag = Math.min(allTags[tag]);
+    //console.log('const minTag is:', minTag);
+
+    /*CLOSE LOOP: for each tags */
+  }
+
+  /*return value of params */
+  console.log('params is:', params);
+
+  return params;
+
+}
+
+
+function calculateTagClass(count, params){
+
+  const normalizedCount = count - params.min;
+
+  const normalizedMax = params.max - params.min;
+
+  const percentage = normalizedCount / normalizedMax;
+
+  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+
+  console.log('classNumber:', classNumber);
+
+  return classNumber;
+
+}
+
+
 function generateTags(){
   /* [NEW] create a new variable allTags with an empty object */
   let allTags = {};
@@ -156,7 +214,7 @@ function generateTags(){
       console.log('html to: ', html);
 
       /* [NEW] check if this link is NOT already in allTags */
-      if(!allTags.hasOwnProperty(tagArray)){
+      if(!Object.prototype.hasOwnProperty.call(allTags, tagArray)){  //??????? old version: if(!allTags.hasOwnProperty(tagArray)){ 
 
         /* [NEW] add tag to allTags object */
         allTags[tagArray] = 1;
@@ -182,6 +240,11 @@ function generateTags(){
 
   console.log('tagList to: ', tagList);
 
+  /* [NEW] Calculeate number of tags*/
+  const tagsParams = CalculateTagsParams(allTags);
+
+  console.log('const tagsParams is: ', tagsParams);
+
   /* [NEW] create variable for all links HTML code */
   let allTagsHTML = '';
 
@@ -189,7 +252,7 @@ function generateTags(){
   for (let tagArray in allTags) {
 
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    allTagsHTML += '<a href="#tag-' + tagArray + '">' + tagArray + '</a>' + ' (' + allTags[tagArray] + ')' + ' ';
+    allTagsHTML += '<li>' + '<a class="' + optCloudClassPrefix + calculateTagClass(allTags[tagArray], tagsParams) + '" href="#tag-' + tagArray + '">' + tagArray + '</a>' + ' (' + allTags[tagArray] + ')' + '</li>';
 
     console.log('allTagsHTML to: ', allTagsHTML);
 
