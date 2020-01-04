@@ -101,7 +101,7 @@
                 </ul>
               </div>
             </article>
-            <article class="post" id="article-5"  data-tags="cactus plant" data-author="Adam Adamowicz">
+            <article class="post" id="article-5"  data-tags="cactus plant cat" data-author="Adam Adamowicz">
               <h3 class="post-title">Article 5</h3>
               <p class="post-author"></p>
               <div class="post-content">
@@ -137,7 +137,7 @@
                 </ul>
               </div>
             </article>
-            <article class="post" id="article-7" data-tags="woman hairdresser" data-author="Edyta Edwardson">
+            <article class="post" id="article-7" data-tags="woman hairdresser cat" data-author="Edyta Edwardson">
               <h3 class="post-title">Article 7</h3>
               <p class="post-author"></p>
               <div class="post-content">
@@ -249,6 +249,26 @@
         </main>
       </div>
     </div>
+    <script id="template-article-link" type="text/x-handlebars-template">
+      <li><a href="#{{ id }}"><span>{{ title }}</span></a></li>
+    </script>
+    <script id="template-tag-link" type="text/x-handlebars-template">
+      <li><a href="#tag-{{ tagId }}">{{ tag }}</a></li>
+    </script>
+    <script id="template-author-link" type="text/x-handlebars-template">
+      <li>by <a href="#author-{{ authorId }}">{{ author }}</a></li>
+    </script>
+    <script id="template-tag-cloud-link" type="text/x-handlebars-template">
+      {{#each tags}}
+      <a class="{{ sizePrefix }}{{ className }}" href="#tag-{{ tag }}">{{ tag }}</a>
+      {{/each}}
+    </script>
+    <script id="template-author-list-link" type="text/x-handlebars-template">
+      {{#each authors}}
+      <li><a href="#author-{{ author }}"> {{ author }}</a> ({{ count}}) </li>
+      {{/each}}
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
