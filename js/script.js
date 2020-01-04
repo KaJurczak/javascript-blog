@@ -53,10 +53,10 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author',
-  //optTagsListSelector = '.tags.list',
+  optTagsListSelector = '.tags.list',
   optCloudClassCount = 5,
-  optCloudClassPrefix = 'tag-size-';
-  //optAuthorListSelector = '.list .authors';
+  optCloudClassPrefix = 'tag-size-',
+  optAuthorListSelector = '.list.authors';
 
 function generateTitleLinks(customSelector = ''){
 
@@ -231,7 +231,7 @@ function generateTags(){
   }
 
   /* [NEW] find list of tags in right column */
-  const tagList = document.querySelector('.tags');
+  const tagList = document.querySelector(optTagsListSelector);
 
   console.log('tagList to: ', tagList);
 
@@ -411,7 +411,7 @@ function generateAuthors(){
   }
 
   /* [NEW] find list of authors in right column */
-  const authorList = document.querySelector('.list.authors');
+  const authorList = document.querySelector(optAuthorListSelector);
 
   console.log('authorList to: ', authorList);
 
