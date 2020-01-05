@@ -92,6 +92,7 @@ body {
   position: absolute;
   z-index: 0;
   height: 100%;
+  margin-right: 30%;
 }
 
 .post.active {
@@ -100,6 +101,7 @@ body {
   opacity: 1;
   transition: all 3s;
   z-index: 1;
+  margin-right: 1%;
 }
 
 .post-author {

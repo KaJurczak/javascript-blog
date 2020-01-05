@@ -107,12 +107,14 @@ body {
   position: absolute;
   z-index: 0;
   height: 100%;
+  margin-right: 30%;
   &.active {
     position: relative;
     cursor: pointer;
     opacity: 1;
     transition: all 3s;
     z-index: 1;
+    margin-right: 1%;
   }
 }
 

@@ -6,7 +6,7 @@ const templates = {
   authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
   tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML),
   authorListLink: Handlebars.compile(document.querySelector('#template-author-list-link').innerHTML)
-}
+};
 
 const titleClickHandler = function(event){
   event.preventDefault(); //nie zmienia adresu strony przy klikaniu w linki
